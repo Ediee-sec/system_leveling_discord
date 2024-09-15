@@ -6,6 +6,8 @@ certifi==2024.6.2
 cffi==1.16.0
 charset-normalizer==3.3.2
 click==8.1.7
+discord==2.3.2
+discord.py==2.3.2
 colorama==0.4.6
 Flask==3.0.3
 google-api-core==2.19.0
