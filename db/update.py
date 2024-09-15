@@ -1,6 +1,7 @@
 import psycopg2
 from psycopg2 import pool
 import logging
+import os
 
 # Configuração do logger
 logging.basicConfig(level=logging.INFO)
@@ -10,11 +11,11 @@ logger = logging.getLogger(__name__)
 connection_pool = psycopg2.pool.SimpleConnectionPool(
     1,  # Número mínimo de conexões
     20, # Número máximo de conexões
-    host="monorail.proxy.rlwy.net",
-    database="railway",
-    user="postgres",
-    password="yAXIOkyKLBJOZKtTKOIOXLQsuxXwNuRH",
-    port="30165",
+    host=os.getenv('HOST'),
+    database=os.getenv('DB'),
+    user=os.getenv('USR'),
+    password=os.getenv('PWD'),
+    port=os.getenv('PORT'),
     connect_timeout=10  # Timeout de 10 segundos
 )
 
