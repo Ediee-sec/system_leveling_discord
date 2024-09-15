@@ -8,13 +8,14 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Configuração do pool de conexões
+print(os.getenv('PWD'))
 connection_pool = psycopg2.pool.SimpleConnectionPool(
     1,  # Número mínimo de conexões
     20, # Número máximo de conexões
     host=os.getenv('HOST'),
     database=os.getenv('DB'),
     user=os.getenv('USR'),
-    password=os.getenv('PWD'),
+    password=os.getenv('PASS'),
     port=os.getenv('PORT'),
     connect_timeout=10  # Timeout de 10 segundos
 )

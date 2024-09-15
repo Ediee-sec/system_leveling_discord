@@ -15,7 +15,7 @@ connection_pool = psycopg2.pool.SimpleConnectionPool(
     host=os.getenv('HOST'),
     database=os.getenv('DB'),
     user=os.getenv('USR'),
-    password=os.getenv('PWD'),
+    password=os.getenv('PASS'),
     port=os.getenv('PORT'),
     connect_timeout=10  # Timeout de 10 segundos
 )
