@@ -21,15 +21,15 @@ class XPMensage(commands.Cog):
     async def update_user_role(self, member, new_level):
         guild = member.guild
         roles_dict = {
-            2: "Madeira",
-            6: "Ferro",
-            12: "Bronze",
-            20: "Prata",
-            30: "Ouro",
-            45: "Platina",
-            70: "Diamante",
-            100: "Mestre",
-            200: "Lenda"
+            2: "Martelo de Madeira",
+            6: "Machado de Metal",
+            12: "Machado de Prata",
+            20: "Machado de Prata Duplo",
+            30: "Machado de Ouro",
+            45: "Machado de Batalha de Metal",
+            70: "Cetro de Safira",
+            100: "Cetro de Diamante",
+            200: "Dragão Preto de olhos Vermelhos"
         }
 
         # Pega os nomes dos cargos
