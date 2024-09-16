@@ -65,8 +65,12 @@ class XPVoice(commands.Cog):
     @tasks.loop(seconds=60)  
     async def give_voice_xp(self):
         for guild in self.bot.guilds:
+            ignore_channel_id = 1033503431773671504  # ID do canal a ser ignorado
             for member in guild.members:
                 if member.voice and not member.voice.self_mute:
+                    if member.voice.channel.id == ignore_channel_id:
+                        continue
+                    
                     user_id = member.id
                     server_id = guild.id
                     avatar_url = str(member.avatar.url) if member.avatar else 'https://i.ibb.co/xYxjFvw/9c3bb649-9038-4113-9543-7c87652aa95a-removebg-preview.png'
