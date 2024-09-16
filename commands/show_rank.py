@@ -32,14 +32,14 @@ class RankSlashCommand(commands.Cog):
 
             # Definindo os ranks e seus requisitos de nível
             ranks = [
-                ("Lenda", 150),
-                ("Mestre", 80),
-                ("Diamante", 50),
-                ("Platina", 30),
-                ("Ouro", 18),
-                ("Prata", 12),
-                ("Bronze", 6),
-                ("Madeira", 2)
+                ("Cetro de Diamante", 150),
+                ("Cetro de Safira", 80),
+                ("Machado de Batalha de Metal", 50),
+                ("Machado de Ouro", 30),
+                ("Machado de Prata Duplo", 18),
+                ("Machado de Prata", 12),
+                ("Machado de Metal", 6),
+                ("Martelo de Madeira", 2)
             ]
 
             # Função para calcular o rank atual com base no nível
