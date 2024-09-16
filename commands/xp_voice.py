@@ -69,7 +69,7 @@ class XPVoice(commands.Cog):
                 if member.voice and not member.voice.self_mute:
                     user_id = member.id
                     server_id = guild.id
-                    avatar_url = str(member.avatar.url) if member.avatar else "No avatar"
+                    avatar_url = str(member.avatar.url) if member.avatar else 'https://i.imgur.com/vgkw9kz.png'
                     user_data = get_data.get_user_data(user_id, server_id)
                     if not user_data:
                         user_data = {'img': avatar_url, 'user_dc': member.name, 'xp': 0,'xp_accumulated': 0, 'lvl': 1, 'timer': 0, 'server_id': server_id}

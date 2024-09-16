@@ -71,7 +71,7 @@ class XPMensage(commands.Cog):
 
         user_id = message.author.id
         user_name = message.author.name
-        avatar_url = str(message.author.avatar.url) if message.author.avatar.url else "No avatar"  # URL da imagem do perfil
+        avatar_url = str(message.author.avatar.url) if message.author.avatar.url else 'https://i.imgur.com/vgkw9kz.png'  # URL da imagem do perfil
         server_id = message.guild.id  # ID do servidor
         current_time = datetime.now(timezone.utc)  # Tempo atual em segundos
 
