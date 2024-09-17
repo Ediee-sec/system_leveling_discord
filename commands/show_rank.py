@@ -69,9 +69,15 @@ class RankSlashCommand(commands.Cog):
             else:
                 xp_for_next_rank = 1024 * (next_rank_level - 1)  # Fórmula baseada no próximo rank
                 xp_remaining_rank = max(0, xp_for_next_rank - xp_accumulated)
-                
+
+            # Função para calcular o progresso para o próximo rank
+            def get_progress_to_next_rank(current_xp, xp_for_next_rank):
+                progress = (current_xp / xp_for_next_rank) * 100
+                return max(0, min(progress, 100))
+
             # Barra de progresso ajustada para o próximo rank
-            progress_rank = int((xp_accumulated / xp_for_next_rank) * 10)  # Dividido por 10 para criar a barra
+            progress_percent = get_progress_to_next_rank(xp_accumulated, xp_for_next_rank)
+            progress_rank = int((progress_percent / 100) * 10)  # Dividido por 10 para criar a barra
             progress_bar_rank = "█" * progress_rank + "░" * (10 - progress_rank)
 
             # Criar a mensagem de resposta com embed
