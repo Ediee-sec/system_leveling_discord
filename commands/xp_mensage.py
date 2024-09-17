@@ -66,7 +66,7 @@ class XPMensage(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author.bot:
+        if message.author.bot or message.author.id == 404296049407033355:
             return  # Ignorar mensagens de bots
 
         user_id = message.author.id
