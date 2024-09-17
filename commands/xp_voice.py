@@ -12,7 +12,7 @@ def calculate_xp(level):
 class XPVoice(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.xp = random.randint(40, 45)
+        self.xp = random.randint(8, 9)
         self.server_booster_multiplier = 1.5
         self.give_voice_xp.start()  # Inicia o loop de tarefas
     
@@ -62,7 +62,7 @@ class XPVoice(commands.Cog):
                 else:
                     print(f"Canal com ID {channel_id} não encontrado.")
     
-    @tasks.loop(seconds=350)  
+    @tasks.loop(seconds=60)  
     async def give_voice_xp(self):
         for guild in self.bot.guilds:
             ignore_channel_id = 1033503431773671504  # ID do canal a ser ignorado
