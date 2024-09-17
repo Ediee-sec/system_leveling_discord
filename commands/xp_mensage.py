@@ -16,7 +16,7 @@ class XPMensage(commands.Cog):
         self.channel_rank_id = 1284961905621991585
         self.server_booster_multiplier = 1.5
         self.timer = 60
-        self.xp = random.randint(40, 50)  # XP aleatório definido aqui
+        self.xp = random.randint(45, 50)  # XP aleatório definido aqui
         super().__init__()
 
     async def update_user_role(self, member, new_level):
