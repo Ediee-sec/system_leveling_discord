@@ -67,7 +67,7 @@ class RankSlashCommand(commands.Cog):
                 xp_for_next_rank = xp_accumulated  # Já no nível máximo
                 xp_remaining_rank = 0
             else:
-                xp_for_next_rank = 1024 * (next_rank_level - 1)  # Fórmula baseada no próximo rank
+                xp_for_next_rank = (current_level + 1) * 1024  # Fórmula baseada no próximo rank
                 xp_remaining_rank = xp_for_next_rank - xp_accumulated
 
             # Barra de progresso ajustada para o próximo rank
