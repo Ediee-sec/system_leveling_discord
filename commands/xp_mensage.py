@@ -3,6 +3,7 @@ from discord.ext import commands
 import random
 import time
 from datetime import datetime, timezone, timedelta
+from discord import ChannelType
 from db import get_data, update
 from img import top
 
@@ -68,6 +69,10 @@ class XPMensage(commands.Cog):
     async def on_message(self, message):
         if message.author.bot:
             return  # Ignorar mensagens de bots
+        
+        # Verificar se a mensagem foi enviada em um canal de voz ou chat de canal de voz
+        if message.channel.type == ChannelType.voice or message.channel.type == ChannelType.stage_voice:
+            return  # Não conceder XP em canais de voz
 
         user_id = message.author.id
         user_name = message.author.name
