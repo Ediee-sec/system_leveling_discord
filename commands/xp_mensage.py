@@ -66,7 +66,7 @@ class XPMensage(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author.bot or message.author.id == 404296049407033355:
+        if message.author.bot:
             return  # Ignorar mensagens de bots
 
         user_id = message.author.id
@@ -78,7 +78,13 @@ class XPMensage(commands.Cog):
         # Buscar dados do usuário no banco de dados
         user_data = get_data.get_user_data(user_id, server_id)
         if not user_data:
-            user_data = {'img': avatar_url, 'user_dc': user_name, 'xp': 0, 'xp_accumulated': 0, 'lvl': 1, 'timer': 0, 'server_id': server_id}
+            user_data = {'img': avatar_url, 'user_dc': user_name, 'xp': 0, 'xp_accumulated': 0, 'lvl': 1, 'timer': 0, 'server_id': server_id, 'last_message': ''}
+            
+        if message.content == user_data['last_message']:
+            return  # Ignorar se a mensagem é igual à anterior
+
+        # Atualiza o conteúdo da última mensagem enviada pelo usuário
+        user_data['last_message'] = message.content
 
         # Verificar se o cooldown de 1 minuto (60 segundos) já passou
         last_xp_time = user_data['timer']
@@ -119,7 +125,7 @@ class XPMensage(commands.Cog):
             await self.update_user_role(message.author, user_data['lvl'])
 
         # Salvar os dados no banco de dados
-        update.upsert_user_data(user_id, avatar_url, user_name, user_data['xp'], user_data['xp_accumulated'], user_data['lvl'], user_data['timer'], server_id)
+        update.upsert_user_data(user_id, avatar_url, user_name, user_data['xp'], user_data['xp_accumulated'], user_data['lvl'], user_data['timer'], server_id, message.content)
 
         # Processar os comandos do bot (necessário para o on_message)
         await self.bot.process_commands(message)

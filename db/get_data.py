@@ -32,7 +32,7 @@ def get_user_data(user_id, server_id):
         logger.info("Executando a consulta SQL...")
 
         cursor.execute(
-            "SELECT img, user_dc, xp, xp_accumulated, lvl, timer FROM rank WHERE user_id = %s AND server_id = %s",
+            "SELECT img, user_dc, xp, xp_accumulated, lvl, timer, last_message FROM rank WHERE user_id = %s AND server_id = %s",
             (user_id, server_id)
         )
         result = cursor.fetchone()
@@ -45,7 +45,8 @@ def get_user_data(user_id, server_id):
                 'xp_accumulated': result[3],
                 'lvl': result[4],
                 'timer': result[5],
-                'server_id': server_id
+                'server_id': server_id,
+                'last_message': result[6]
             }
             logger.info(f"Dados retornados: {data}")
             return data

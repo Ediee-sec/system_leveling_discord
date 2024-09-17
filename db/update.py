@@ -20,7 +20,7 @@ connection_pool = psycopg2.pool.SimpleConnectionPool(
     connect_timeout=10  # Timeout de 10 segundos
 )
 
-def upsert_user_data(user_id, img, user_dc, xp, xp_accumulated, lvl, timer, server_id):
+def upsert_user_data(user_id, img, user_dc, xp, xp_accumulated, lvl, timer, server_id, last_message):
     conn = None
     cursor = None
     try:
@@ -32,16 +32,17 @@ def upsert_user_data(user_id, img, user_dc, xp, xp_accumulated, lvl, timer, serv
         logger.info("Executando a consulta SQL...")
 
         cursor.execute(""" 
-            INSERT INTO rank (user_id, img, user_dc, xp, xp_accumulated, lvl, timer, server_id)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO rank (user_id, img, user_dc, xp, xp_accumulated, lvl, timer, server_id, last_message)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (user_id) DO UPDATE
             SET img = EXCLUDED.img,
                 user_dc = EXCLUDED.user_dc,
                 xp = EXCLUDED.xp,
                 xp_accumulated = EXCLUDED.xp_accumulated,
                 lvl = EXCLUDED.lvl,
-                timer = EXCLUDED.timer;
-        """, (user_id, img, user_dc, xp, xp_accumulated, lvl, timer, server_id))
+                timer = EXCLUDED.timer,
+                last_message = EXCLUDED.last_message;
+        """, (user_id, img, user_dc, xp, xp_accumulated, lvl, timer, server_id, last_message))
 
         conn.commit()
         logger.info("Consulta executada e dados commitados com sucesso.")

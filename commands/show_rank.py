@@ -32,11 +32,12 @@ class RankSlashCommand(commands.Cog):
 
             # Definindo os ranks e seus requisitos de nível
             ranks = [
-                ("Cetro de Diamante", 150),
-                ("Cetro de Safira", 80),
-                ("Machado de Batalha de Metal", 50),
+                ("Dragão Preto de olhos Vermelhos", 200),
+                ("Cetro de Diamante", 100),
+                ("Cetro de Safira", 70),
+                ("Machado de Batalha de Metal", 45),
                 ("Machado de Ouro", 30),
-                ("Machado de Prata Duplo", 18),
+                ("Machado de Prata Duplo", 20),
                 ("Machado de Prata", 12),
                 ("Machado de Metal", 6),
                 ("Martelo de Madeira", 2)
@@ -67,11 +68,11 @@ class RankSlashCommand(commands.Cog):
                 xp_for_next_rank = xp_accumulated  # Já no nível máximo
                 xp_remaining_rank = 0
             else:
-                xp_for_next_rank = (current_level + 1) * 1024  # Fórmula baseada no próximo rank
-                xp_remaining_rank = xp_for_next_rank - xp_accumulated
+                xp_for_next_rank = (current_level + 1) * 1024 # Fórmula baseada no próximo rank
+                xp_remaining_rank = xp_for_next_rank - current_xp
 
             # Barra de progresso ajustada para o próximo rank
-            progress_rank = int((xp_accumulated / xp_for_next_rank) * 10)  # Dividido por 10 para criar a barra
+            progress_rank = int((current_xp / xp_for_next_rank) * 10)  # Dividido por 10 para criar a barra
             progress_bar_rank = "█" * progress_rank + "░" * (10 - progress_rank)
 
             # Criar a mensagem de resposta com embed
@@ -89,13 +90,13 @@ class RankSlashCommand(commands.Cog):
             embed.add_field(name="🔰 **Nível**", value=f"**{current_level}**", inline=True)
 
             # Campo de XP Atual com barra de progresso para o próximo rank
-            embed.add_field(name="⚡ **XP Atual**", value=f"**{xp_accumulated:,} / {xp_for_next_rank:,}**", inline=True)
+            embed.add_field(name="⚡ **XP Atual**", value=f"**{current_xp:,} / {xp_for_next_rank:,}**", inline=True)
 
             # Campo de XP Restante para o próximo rank
-            embed.add_field(name="🎯 **XP Restante para o Próximo Rank**", value=f"**{xp_remaining_rank:,}**", inline=False)
+            embed.add_field(name="🎯 **XP Acumulada**", value=f"**{xp_accumulated:,}**", inline=False)
 
             # Barra de progresso para o próximo rank
-            embed.add_field(name="📈 **Progresso para o Próximo Rank**", value=f"`[{progress_bar_rank}] {xp_accumulated / xp_for_next_rank:.0%}`", inline=False)
+            embed.add_field(name="📈 **Progresso para o Próximo Rank**", value=f"`[{progress_bar_rank}] {current_xp / xp_for_next_rank:.0%}`", inline=False)
 
             # Responder ao comando com o embed
             await interaction.followup.send(embed=embed)
