@@ -67,13 +67,13 @@ class RankSlashCommand(commands.Cog):
                 xp_for_next_rank = xp_accumulated  # Já no nível máximo
                 xp_remaining_rank = 0
             else:
-                xp_for_next_rank = 1024 * (next_rank_level - 1)  # Fórmula baseada no próximo rank
+                xp_for_next_rank = 1024 * next_rank_level  # Baseie o cálculo no próximo rank (não subtraia 1)
                 xp_remaining_rank = max(0, xp_for_next_rank - xp_accumulated)
 
             # Função para calcular o progresso para o próximo rank
             def get_progress_to_next_rank(current_xp, xp_for_next_rank):
                 progress = (current_xp / xp_for_next_rank) * 100
-                return max(0, min(progress, 100))
+                return max(0, min(progress, 100))  # Limitar o progresso entre 0% e 100%
 
             # Barra de progresso ajustada para o próximo rank
             progress_percent = get_progress_to_next_rank(xp_accumulated, xp_for_next_rank)
