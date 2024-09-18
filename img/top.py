@@ -1,21 +1,47 @@
 def top(new_role_name):
     if new_role_name == "Martelo de Madeira":
-        elo = '<:madeira:1284960432565784647>'
+        elo = '<:martelo_de_madeira:1285802030757187604>'
+        
+    elif new_role_name == "Martelo de Madeira Duplo":
+        elo = '<:martelo_de_madeira_duplo:1285802028915884032>'
+        
+    elif new_role_name == "Martelo de Pedra":
+        elo = '<:matelo_de_pedra:1285802273955643412>'   
+        
+    elif new_role_name == "Martelo de Pedra Duplo":
+        elo = '<:martelo_de_pedra_duplo:1285802025048735757>'
+        
     elif new_role_name == "Machado de Metal":
-        elo = '<:ferro:1284960447140860107>'
+        elo = '<:machado_de_metal:1285802221279379537>'
+        
+    elif new_role_name == "Machado de Metal Duplo":
+        elo = '<:machado_de_metal_duplo:1285802020783132672>'
+        
     elif new_role_name == "Machado de Prata":
-        elo = '<:bronze:1284960441113509941>'   
+        elo = '<:machado_de_prata:1285802167193698385>'
+        
     elif new_role_name == "Machado de Prata Duplo":
-        elo = '<:prata:1284960438034894939>'
+        elo = '<:machado_de_prata_duplo:1285802016345423915>'
+        
     elif new_role_name == "Machado de Ouro":
-        elo = '<:ouro:1284960442523062343>'
-    elif new_role_name == "Machado de Batalha de Metal":
-        elo = '<:platina:1284960929725026315>'
+        elo = '<:machado_de_ouro:1285802014508580977>'
+        
+    elif new_role_name == "Machado de Ouro Duplo":
+        elo = '<:machado_de_ouro_duplo:1285802012742778972>'
+        
+    elif new_role_name == "Cetro de Violeta":
+        elo = '<:cetro_violeta:1285802010976976919>'
+        
     elif new_role_name == "Cetro de Safira":
-        elo = '<:diamante:1284960445027057716>'
-    elif new_role_name == "Cetro de Diamante":
-        elo = '<:mestre:1284960436071960667>'
-    elif new_role_name == "Dragão Preto de olhos Vermelhos":
-        elo = '<:lenda:1284960433802838160>'
+        elo = '<:cetro_safira:1285802008221188096>'
+        
+    elif new_role_name == "Cetro de Ruby":
+        elo = '<:cetro_ruby:1285802008221188096>'
+        
+    elif new_role_name == "Dragão Ambar":
+        elo = '<:dragao_ambar:1285801999811608608>'
+        
+    elif new_role_name == "Dragão Preto dos olhos Vermelhos":
+        elo = '<:dragao_preto:1285801995445342239>'
         
     return elo

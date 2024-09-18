@@ -32,16 +32,23 @@ class RankSlashCommand(commands.Cog):
 
             # Definindo os ranks e seus requisitos de nível
             ranks = [
-                ("Dragão Preto de olhos Vermelhos", 200),
-                ("Cetro de Diamante", 100),
-                ("Cetro de Safira", 70),
-                ("Machado de Batalha de Metal", 45),
-                ("Machado de Ouro", 30),
-                ("Machado de Prata Duplo", 20),
-                ("Machado de Prata", 12),
-                ("Machado de Metal", 6),
-                ("Martelo de Madeira", 2)
-            ]
+                        ("Dragão Preto dos olhos Vermelhos", 200),
+                        ("Dragão Ambar", 135),
+                        ("Cetro de Diamante Negro", 105),
+                        ("Cetro de Ruby", 80),
+                        ("Cetro de Safira", 60),
+                        ("Cetro de Violeta", 45),
+                        ("Machado de Ouro Duplo", 37),
+                        ("Machado de Ouro", 32),
+                        ("Machado de Prata Duplo", 24),
+                        ("Machado de Prata", 20),
+                        ("Machado de Metal Duplo", 14),
+                        ("Machado de Metal", 12),
+                        ("Martelo de Pedra Duplo", 9),
+                        ("Martelo de Pedra", 7),
+                        ("Martelo de Madeira Duplo", 4),
+                        ("Martelo de Madeira", 2)
+                    ]
 
             # Função para calcular o rank atual com base no nível
             def get_current_rank(level):

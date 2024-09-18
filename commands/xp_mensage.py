@@ -23,14 +23,21 @@ class XPMensage(commands.Cog):
         guild = member.guild
         roles_dict = {
             2: "Martelo de Madeira",
-            6: "Machado de Metal",
-            12: "Machado de Prata",
-            20: "Machado de Prata Duplo",
-            30: "Machado de Ouro",
-            45: "Machado de Batalha de Metal",
-            70: "Cetro de Safira",
-            100: "Cetro de Diamante",
-            200: "Dragão Preto de olhos Vermelhos"
+            4: "Martelo de Madeira Duplo",
+            7: "Martelo de Pedra",
+            9: "Martelo de Pedra Duplo",
+            12: "Machado de Metal",
+            14: "Machado de Metal Duplo",
+            20: "Machado de Prata",
+            24: "Machado de Prata Duplo",
+            32: "Machado de Ouro",
+            37: "Machado de Ouro Duplo",
+            45: "Cetro de Violeta",
+            60: "Cetro de Safira",
+            80: "Cetro de Ruby",
+            105: "Cetro de Diamante Negro",
+            135: "Dragão Ambar",
+            200: "Dragão Preto dos olhos Vermelhos"
         }
 
         # Pega os nomes dos cargos
