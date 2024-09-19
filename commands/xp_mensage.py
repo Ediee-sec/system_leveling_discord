@@ -6,6 +6,8 @@ from datetime import datetime, timezone, timedelta
 from discord import ChannelType
 from db import get_data, update
 from img import top
+import emoji
+import re
 
 def calculate_xp(level):
     return 1024 * level
@@ -97,6 +99,11 @@ class XPMensage(commands.Cog):
 
         # Atualiza o conteúdo da última mensagem enviada pelo usuário
         user_data['last_message'] = message.content
+        
+        #Verifica se a mensagem contém emojis customizados
+        CUSTOM_EMOJI_PATTERN = r'<a?:\w+:\d+>'
+        if any(isinstance(part, discord.Emoji) for part in message.content) or any(char in emoji.EMOJI_DATA for char in message.content) or re.search(CUSTOM_EMOJI_PATTERN, message.content):
+            return
 
         # Verificar se o cooldown de 1 minuto (60 segundos) já passou
         last_xp_time = user_data['timer']
