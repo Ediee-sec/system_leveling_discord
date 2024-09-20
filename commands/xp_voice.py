@@ -13,7 +13,7 @@ class XPVoice(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.xp = random.randint(40, 45)
-        self.server_booster_multiplier = 1.5
+        self.server_booster_multiplier = 0.5
         self.give_voice_xp.start()  # Inicia o loop de tarefas
     
     async def update_user_role(self, member, new_level):
@@ -28,12 +28,16 @@ class XPVoice(commands.Cog):
             20: "Machado de Prata",
             24: "Machado de Prata Duplo",
             32: "Machado de Ouro",
-            37: "Machado de Ouro Duplo",
-            45: "Cetro de Violeta",
-            60: "Cetro de Safira",
+            35: "Machado de Ouro Duplo",
+            40: "Machado de Metal com Duas Lâminas",
+            45: "Machado de Prata com Duas Lâminas",
+            50: "Machado de Ouro com Duas Lâminas",
+            60: "Cetro de Violeta",
+            70: "Cetro de Safira",
             80: "Cetro de Ruby",
-            105: "Cetro de Diamante Negro",
-            135: "Dragão Ambar",
+            100: "Cetro de Diamante Negro",
+            120: "Cetro de Diamante Negro",
+            150: "Dragão Ambar",
             200: "Dragão Preto dos olhos Vermelhos"
         }
         
@@ -78,6 +82,11 @@ class XPVoice(commands.Cog):
                     if member.voice.channel.id == ignore_channel_id:
                         continue
                     
+                    # Verificar o número de membros na mesma sala de voz
+                    voice_channel = member.voice.channel
+                    if len(voice_channel.members) < 3:  # Considera o próprio membro, então precisa de pelo menos 4 na sala
+                        continue  # Não concede XP se houver menos de 3 membros na sala
+                    
                     user_id = member.id
                     server_id = guild.id
                     avatar_url = str(member.avatar.url) if member.avatar else 'https://i.ibb.co/xYxjFvw/9c3bb649-9038-4113-9543-7c87652aa95a-removebg-preview.png'
@@ -92,7 +101,7 @@ class XPVoice(commands.Cog):
                     xp_to_add = self.xp
 
                     # Aplicar o multiplicador de 15% se o usuário for Server Booster
-                    xp_multiplier = self.server_booster_multiplier if is_booster else 1.0
+                    xp_multiplier = self.server_booster_multiplier if is_booster else 0.0
                     xp_to_add = int(xp_to_add * xp_multiplier)
                                 
                     # Adiciona XP aleatório entre 20 e 30 por minuto

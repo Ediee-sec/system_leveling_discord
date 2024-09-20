@@ -16,8 +16,8 @@ class XPMensage(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.channel_rank_id = 1284961905621991585
-        self.server_booster_multiplier = 1.5
-        self.timer = 60
+        self.server_booster_multiplier = 0.5
+        self.timer = random.randint(120, 180)
         self.xp = random.randint(50, 55)  # XP aleatório definido aqui
         super().__init__()
 
@@ -33,12 +33,16 @@ class XPMensage(commands.Cog):
             20: "Machado de Prata",
             24: "Machado de Prata Duplo",
             32: "Machado de Ouro",
-            37: "Machado de Ouro Duplo",
-            45: "Cetro de Violeta",
-            60: "Cetro de Safira",
+            35: "Machado de Ouro Duplo",
+            40: "Machado de Metal com Duas Lâminas",
+            45: "Machado de Prata com Duas Lâminas",
+            50: "Machado de Ouro com Duas Lâminas",
+            60: "Cetro de Violeta",
+            70: "Cetro de Safira",
             80: "Cetro de Ruby",
-            105: "Cetro de Diamante Negro",
-            135: "Dragão Ambar",
+            100: "Cetro de Diamante Negro",
+            120: "Cetro de Diamante Negro",
+            150: "Dragão Ambar",
             200: "Dragão Preto dos olhos Vermelhos"
         }
 
@@ -104,6 +108,10 @@ class XPMensage(commands.Cog):
         CUSTOM_EMOJI_PATTERN = r'<a?:\w+:\d+>'
         if any(isinstance(part, discord.Emoji) for part in message.content) or any(char in emoji.EMOJI_DATA for char in message.content) or re.search(CUSTOM_EMOJI_PATTERN, message.content):
             return
+        
+        # Remove o ganho de xp para imagens
+        if len(message.attachments) >= 1:
+            return 
 
         # Verificar se o cooldown de 1 minuto (60 segundos) já passou
         last_xp_time = user_data['timer']
@@ -125,7 +133,7 @@ class XPMensage(commands.Cog):
         xp_to_add = self.xp
 
         # Aplicar o multiplicador de 15% se o usuário for Server Booster
-        xp_multiplier = self.server_booster_multiplier if is_booster else 1.0
+        xp_multiplier = self.server_booster_multiplier if is_booster else 0.0
         xp_to_add = int(xp_to_add * xp_multiplier)
 
         user_data['xp'] += xp_to_add
