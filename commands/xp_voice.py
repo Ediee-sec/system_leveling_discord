@@ -84,7 +84,7 @@ class XPVoice(commands.Cog):
                     
                     # Verificar o número de membros na mesma sala de voz
                     voice_channel = member.voice.channel
-                    if len(voice_channel.members) < 3:  # Considera o próprio membro, então precisa de pelo menos 4 na sala
+                    if len(voice_channel.members) < 2:  # Considera o próprio membro, então precisa de pelo menos 4 na sala
                         continue  # Não concede XP se houver menos de 3 membros na sala
                     
                     user_id = member.id
