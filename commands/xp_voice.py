@@ -120,7 +120,7 @@ class XPVoice(commands.Cog):
                         await self.update_user_role(member, user_data['lvl'])
 
                     # Atualiza o timer
-                    user_data['timer'] = datetime.now(timezone.utc)
+                    user_data['timer_voice'] = datetime.now(timezone.utc)
 
                     # Salvar os dados no banco de dados
                     update.upsert_user_data(user_id, user_data['img'], user_data['user_dc'], user_data['xp'],user_data['xp_accumulated'], user_data['lvl'], user_data['timer'], server_id, user_data['last_message'])

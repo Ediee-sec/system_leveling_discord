@@ -101,7 +101,7 @@ class XPMensage(commands.Cog):
         user_data['last_message'] = message.content
 
         # Verificar se o cooldown de 1 minuto (60 segundos) já passou
-        last_xp_time = user_data['timer']
+        last_xp_time = user_data['timer_message']
         if last_xp_time == 0:
             last_xp_time = datetime.now(timezone.utc) - timedelta(seconds=60)
 
