@@ -8,6 +8,7 @@ from db import get_data, update
 from rules import rules_mensage
 from img import top
 from log import logger
+import pytz
 
 def calculate_xp(level):
     return 1024 * level
@@ -18,7 +19,7 @@ class XPMensage(commands.Cog):
         self.channel_rank_id = 1284961905621991585
         self.server_booster_multiplier = 1.75
         self.timer = random.randint(120, 180)
-        self.xp = random.randint(50, 55)  # XP aleatório definido aqui
+        self.xp = random.randint(0, 0)  # XP aleatório definido aqui
         super().__init__()
 
     async def update_user_role(self, member, new_level):
@@ -86,6 +87,9 @@ class XPMensage(commands.Cog):
         avatar_url = str(message.author.avatar.url) if message.author.avatar.url else 'https://i.ibb.co/xYxjFvw/9c3bb649-9038-4113-9543-7c87652aa95a-removebg-preview.png'  # URL da imagem do perfil
         server_id = message.guild.id  # ID do servidor
         current_time = datetime.now(timezone.utc)  # Tempo atual em segundos
+        sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
+        current_time = current_time.astimezone(sao_paulo_tz)
+        
 
         # Buscar dados do usuário no banco de dados
         user_data = get_data.get_user_data(user_id, server_id, 'timer_message')
@@ -109,7 +113,7 @@ class XPMensage(commands.Cog):
             last_xp_time = last_xp_time.replace(tzinfo=timezone.utc)
 
         # Verificar se o cooldown de 1 minuto (60 segundos) já passou
-        time_diff = current_time - last_xp_time
+        time_diff = current_time.replace(tzinfo=timezone.utc) - last_xp_time
         if time_diff.total_seconds() < self.timer:
             return  # Se não passou 1 minuto, não dá XP
 
@@ -141,7 +145,7 @@ class XPMensage(commands.Cog):
         logger.get_data_by_user(datetime.now().strftime("%d/%m/%Y %H:%M:%S"), message.author.name, 'Message', self.xp, xp_multiplier, xp_to_add, user_data['lvl'],message.channel.name, message.content)
 
         # Salvar os dados no banco de dados
-        update.upsert_user_data(user_id, avatar_url, user_name, user_data['xp'], user_data['xp_accumulated'], user_data['lvl'], user_data['timer_message'], server_id, message.content, 'timer_message')
+        update.upsert_user_data(user_id, avatar_url, user_name, user_data['xp'], user_data['xp_accumulated'], user_data['lvl'], current_time, server_id, message.content, 'timer_message')
 
         # Processar os comandos do bot (necessário para o on_message)
         await self.bot.process_commands(message)
