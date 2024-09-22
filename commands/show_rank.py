@@ -16,7 +16,7 @@ class RankSlashCommand(commands.Cog):
             # Obter dados do usuário
             user_id = interaction.user.id
             server_id = interaction.guild.id
-            user_data = get_data.get_user_data(user_id, server_id)
+            user_data = get_data.get_user_data(user_id, server_id, 'timer_message')
             
             if not user_data:
                 await interaction.followup.send("Você ainda não tem um rank!", ephemeral=True)
