@@ -138,7 +138,7 @@ class XPMensage(commands.Cog):
 
             await self.update_user_role(message.author, user_data['lvl'])
             
-        #logger.get_data_by_user(datetime.now().strftime("%d/%m/%Y %H:%M:%S"), user_id, 'Mensage', self.xp, self.server_booster_multiplier, xp_to_add, user_data['lvl'])
+        logger.get_data_by_user(datetime.now().strftime("%d/%m/%Y %H:%M:%S"), message.author.name, 'Message', self.xp, xp_multiplier, xp_to_add, user_data['lvl'],message.channel.name, message.content)
 
         # Salvar os dados no banco de dados
         update.upsert_user_data(user_id, avatar_url, user_name, user_data['xp'], user_data['xp_accumulated'], user_data['lvl'], user_data['timer_message'], server_id, message.content, 'timer_message')

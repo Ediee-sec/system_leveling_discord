@@ -1,13 +1,19 @@
-def get_data_by_user(time,user,type,xp,multiplier,xp_multiplied,level):
+from db import insert_log
+
+def get_data_by_user(time,user,type,xp,multiplier,xp_multiplied,level,channel, content):
     dicionarie = {
-        'time': time,
+        'datetime': time,
         'user': user,
         'type': type,
         'xp': xp,
         'multiplier': multiplier,
         'xp_multiplied': xp_multiplied,
-        'level': level
+        'level': level,
+        'channel': channel,
+        'content': content
     }
     
-    return dicionarie
+    insert_log.insert_user_activity(dicionarie)
+    
+    
     

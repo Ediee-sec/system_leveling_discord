@@ -5,6 +5,7 @@ import time
 from datetime import datetime, timezone
 from db import get_data, update
 from img import top
+from log import logger
 
 def calculate_xp(level):
     return 1024 * level
@@ -105,7 +106,7 @@ class XPVoice(commands.Cog):
                     xp_to_add = int(xp_to_add * xp_multiplier)
                                 
                     # Adiciona XP aleatório entre 20 e 30 por minuto
-                    xp_to_add = self.xp
+                    #xp_to_add = self.xp
                     user_data['xp'] += xp_to_add
                     user_data['xp_accumulated'] += xp_to_add
 
@@ -121,6 +122,8 @@ class XPVoice(commands.Cog):
 
                     # Atualiza o timer
                     user_data['timer_voice'] = datetime.now(timezone.utc)
+                    
+                    logger.get_data_by_user(datetime.now().strftime("%d/%m/%Y %H:%M:%S"), member.name, 'Voice', self.xp, xp_multiplier, xp_to_add, user_data['lvl'],member.voice.channel.name, None)
 
                     # Salvar os dados no banco de dados
                     update.upsert_user_data(user_id, user_data['img'], user_data['user_dc'], user_data['xp'],user_data['xp_accumulated'], user_data['lvl'], user_data['timer_voice'], server_id, user_data['last_message'], 'timer_voice')
