@@ -5,9 +5,9 @@ import time
 from datetime import datetime, timezone, timedelta
 from discord import ChannelType
 from db import get_data, update
+from rules import rules_mensage
 from img import top
-import emoji
-import re
+from log import logger
 
 def calculate_xp(level):
     return 1024 * level
@@ -80,13 +80,7 @@ class XPMensage(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author.bot:
-            return  # Ignorar mensagens de bots
         
-        # Verificar se a mensagem foi enviada em um canal de voz ou chat de canal de voz
-        if message.channel.type == ChannelType.voice or message.channel.type == ChannelType.stage_voice:
-            return  # Não conceder XP em canais de voz
-
         user_id = message.author.id
         user_name = message.author.name
         avatar_url = str(message.author.avatar.url) if message.author.avatar.url else 'https://i.ibb.co/xYxjFvw/9c3bb649-9038-4113-9543-7c87652aa95a-removebg-preview.png'  # URL da imagem do perfil
@@ -97,21 +91,14 @@ class XPMensage(commands.Cog):
         user_data = get_data.get_user_data(user_id, server_id)
         if not user_data:
             user_data = {'img': avatar_url, 'user_dc': user_name, 'xp': 0, 'xp_accumulated': 0, 'lvl': 1, 'timer': 0, 'server_id': server_id, 'last_message': ''}
-            
-        if message.content == user_data['last_message']:
-            return  # Ignorar se a mensagem é igual à anterior
+        
+        job = rules_mensage.RulesMensage()
+        check = job.check_rules_message(message, user_data['last_message'])
+        if check:
+            return
 
         # Atualiza o conteúdo da última mensagem enviada pelo usuário
         user_data['last_message'] = message.content
-        
-        #Verifica se a mensagem contém emojis customizados
-        CUSTOM_EMOJI_PATTERN = r'<a?:\w+:\d+>'
-        if any(isinstance(part, discord.Emoji) for part in message.content) or any(char in emoji.EMOJI_DATA for char in message.content) or re.search(CUSTOM_EMOJI_PATTERN, message.content):
-            return
-        
-        # Remove o ganho de xp para imagens
-        if len(message.attachments) >= 1:
-            return 
 
         # Verificar se o cooldown de 1 minuto (60 segundos) já passou
         last_xp_time = user_data['timer']
@@ -150,6 +137,8 @@ class XPMensage(commands.Cog):
             channel_rank = self.bot.get_channel(self.channel_rank_id)
 
             await self.update_user_role(message.author, user_data['lvl'])
+            
+        #logger.get_data_by_user(datetime.now().strftime("%d/%m/%Y %H:%M:%S"), user_id, 'Mensage', self.xp, self.server_booster_multiplier, xp_to_add, user_data['lvl'])
 
         # Salvar os dados no banco de dados
         update.upsert_user_data(user_id, avatar_url, user_name, user_data['xp'], user_data['xp_accumulated'], user_data['lvl'], user_data['timer'], server_id, message.content)
