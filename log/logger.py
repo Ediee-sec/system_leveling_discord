@@ -1,6 +1,8 @@
 from db import insert_log
+from datetime import timedelta
 
 def get_data_by_user(time,user,type,xp,multiplier,xp_multiplied,level,channel, content):
+    time = time - timedelta(hours=3)
     dicionarie = {
         'datetime': time,
         'user': user,
