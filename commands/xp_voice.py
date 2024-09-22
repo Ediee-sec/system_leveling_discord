@@ -90,7 +90,7 @@ class XPVoice(commands.Cog):
                     user_id = member.id
                     server_id = guild.id
                     avatar_url = str(member.avatar.url) if member.avatar else 'https://i.ibb.co/xYxjFvw/9c3bb649-9038-4113-9543-7c87652aa95a-removebg-preview.png'
-                    user_data = get_data.get_user_data(user_id, server_id)
+                    user_data = get_data.get_user_data(user_id, server_id, 'timer_voice')
                     if not user_data:
                         user_data = {'img': avatar_url, 'user_dc': member.name, 'xp': 0,'xp_accumulated': 0, 'lvl': 1, 'timer': 0, 'server_id': server_id, 'last_message': ''}
 
@@ -123,7 +123,7 @@ class XPVoice(commands.Cog):
                     user_data['timer_voice'] = datetime.now(timezone.utc)
 
                     # Salvar os dados no banco de dados
-                    update.upsert_user_data(user_id, user_data['img'], user_data['user_dc'], user_data['xp'],user_data['xp_accumulated'], user_data['lvl'], user_data['timer'], server_id, user_data['last_message'])
+                    update.upsert_user_data(user_id, user_data['img'], user_data['user_dc'], user_data['xp'],user_data['xp_accumulated'], user_data['lvl'], user_data['timer_voice'], server_id, user_data['last_message'], 'timer_voice')
 
     @give_voice_xp.before_loop
     async def before_give_voice_xp(self):

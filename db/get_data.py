@@ -20,7 +20,7 @@ connection_pool = psycopg2.pool.SimpleConnectionPool(
     connect_timeout=10  # Timeout de 10 segundos
 )
 
-def get_user_data(user_id, server_id):
+def get_user_data(user_id, server_id, timer):
     conn = None
     cursor = None
     try:
@@ -32,7 +32,7 @@ def get_user_data(user_id, server_id):
         logger.info("Executando a consulta SQL...")
 
         cursor.execute(
-            "SELECT img, user_dc, xp, xp_accumulated, lvl, timer, last_message FROM rank WHERE user_id = %s AND server_id = %s",
+            f"SELECT img, user_dc, xp, xp_accumulated, lvl, {timer}, last_message FROM rank WHERE user_id = %s AND server_id = %s",
             (user_id, server_id)
         )
         result = cursor.fetchone()
@@ -44,7 +44,7 @@ def get_user_data(user_id, server_id):
                 'xp': result[2],
                 'xp_accumulated': result[3],
                 'lvl': result[4],
-                'timer': result[5],
+                f'{timer}': result[5],
                 'server_id': server_id,
                 'last_message': result[6]
             }

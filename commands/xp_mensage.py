@@ -88,7 +88,7 @@ class XPMensage(commands.Cog):
         current_time = datetime.now(timezone.utc)  # Tempo atual em segundos
 
         # Buscar dados do usuário no banco de dados
-        user_data = get_data.get_user_data(user_id, server_id)
+        user_data = get_data.get_user_data(user_id, server_id, 'timer_message')
         if not user_data:
             user_data = {'img': avatar_url, 'user_dc': user_name, 'xp': 0, 'xp_accumulated': 0, 'lvl': 1, 'timer': 0, 'server_id': server_id, 'last_message': ''}
         
@@ -141,7 +141,7 @@ class XPMensage(commands.Cog):
         #logger.get_data_by_user(datetime.now().strftime("%d/%m/%Y %H:%M:%S"), user_id, 'Mensage', self.xp, self.server_booster_multiplier, xp_to_add, user_data['lvl'])
 
         # Salvar os dados no banco de dados
-        update.upsert_user_data(user_id, avatar_url, user_name, user_data['xp'], user_data['xp_accumulated'], user_data['lvl'], user_data['timer'], server_id, message.content)
+        update.upsert_user_data(user_id, avatar_url, user_name, user_data['xp'], user_data['xp_accumulated'], user_data['lvl'], user_data['timer_message'], server_id, message.content, 'timer_message')
 
         # Processar os comandos do bot (necessário para o on_message)
         await self.bot.process_commands(message)
