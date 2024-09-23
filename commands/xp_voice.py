@@ -14,7 +14,7 @@ class XPVoice(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.xp = random.randint(40, 45)
-        self.server_booster_multiplier = 1.75
+        self.server_booster_multiplier = 1.15
         self.give_voice_xp.start()  # Inicia o loop de tarefas
     
     async def update_user_role(self, member, new_level):

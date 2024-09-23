@@ -17,7 +17,7 @@ class XPMensage(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.channel_rank_id = 1284961905621991585
-        self.server_booster_multiplier = 1.75
+        self.server_booster_multiplier = 1.15
         self.timer = random.randint(120, 180)
         self.xp = random.randint(50, 55)  # XP aleatório definido aqui
         super().__init__()
