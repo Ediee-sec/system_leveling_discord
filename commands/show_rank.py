@@ -32,44 +32,45 @@ class RankSlashCommand(commands.Cog):
 
             # Definindo os ranks e seus requisitos de nível
             ranks = [
-                        ### Fase 1: Ferramentas de Madeira e Pedra (Lv 1-10)
-                        ("Martelo de Madeira", 2),
-                        ("Martelo de Madeira Duplo", 4),
-                        ("Martelo de Pedra", 6),
-                        ("Martelo de Pedra Duplo", 8),
-                        ("Machado de Metal", 10),
-
-                        ### Fase 2: Ferramentas de Metal (Lv 11-20)
-                        ("Machado de Metal Duplo", 12),
-                        ("Machado de Prata", 15),
-                        ("Machado de Prata Duplo", 18),
-                        ("Machado de Ouro", 20),
-
-                        ### Fase 3: Ferramentas Avançadas (Lv 21-40)
-                        ("Machado de Ouro Duplo", 23),
-                        ("Machado de Metal com Duas Lâminas", 27),
-                        ("Machado de Prata com Duas Lâminas", 31),
-                        ("Machado de Ouro com Duas Lâminas", 36),
-
-                        ### Fase 4: Estrelas e Conquistas (Lv 41-60)
-                        ("Estrela de Bronze", 41),
-                        ("Estrela de Prata", 46),
-                        ("Estrela de Ouro", 51),
-                        ("Duas Estrelas de Ouro", 56),
-                        ("Três Estrelas de Ouro", 60),
+                        ### Fase 6: Medalhas e Conquistas Supremas (Lv 86-100)
+                        ("Dragão Preto dos Olhos Vermelhos", 100),
+                        ("Medalha de Ouro", 96),
+                        ("Medalha de Prata", 93),
+                        ("Medalha de Bronze", 90),
 
                         ### Fase 5: Cetros (Lv 61-85)
-                        ("Cetro de Violeta", 65),
-                        ("Cetro de Safira", 70),
-                        ("Cetro de Rubi", 75),
-                        ("Cetro de Diamante Negro", 80),
                         ("Cetro de Diamante Puro", 85),
+                        ("Cetro de Diamante Negro", 80),
+                        ("Cetro de Rubi", 75),
+                        ("Cetro de Safira", 70),
+                        ("Cetro de Violeta", 65),
 
-                        ### Fase 6: Medalhas e Conquistas Supremas (Lv 86-100)
-                        ("Medalha de Bronze", 90),
-                        ("Medalha de Prata", 93),
-                        ("Medalha de Ouro", 96),
-                        ("Dragão Preto dos Olhos Vermelhos", 100)
+                        ### Fase 4: Estrelas e Conquistas (Lv 41-60)
+                        ("Três Estrelas de Ouro", 60),
+                        ("Duas Estrelas de Ouro", 56),
+                        ("Estrela de Ouro", 51),
+                        ("Estrela de Prata", 46),
+                        ("Estrela de Bronze", 41),
+
+                        ### Fase 3: Ferramentas Avançadas (Lv 21-40)
+                        ("Machado de Ouro com Duas Lâminas", 36),
+                        ("Machado de Prata com Duas Lâminas", 31),
+                        ("Machado de Metal com Duas Lâminas", 27),
+                        ("Machado de Ouro Duplo", 23),
+
+                        ### Fase 2: Ferramentas de Metal (Lv 11-20)
+                        ("Machado de Ouro", 20),
+                        ("Machado de Prata Duplo", 18),
+                        ("Machado de Prata", 15),
+                        ("Machado de Metal Duplo", 12),
+
+                        ### Fase 1: Ferramentas de Madeira e Pedra (Lv 1-10)
+                        ("Machado de Metal", 10),
+                        ("Martelo de Pedra Duplo", 8),
+                        ("Martelo de Pedra", 6),
+                        ("Martelo de Madeira Duplo", 4),
+                        ("Martelo de Madeira", 2)
+
 
                     ]
 
