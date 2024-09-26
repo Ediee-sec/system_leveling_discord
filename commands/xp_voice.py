@@ -13,33 +13,41 @@ def calculate_xp(level):
 class XPVoice(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.xp = random.randint(40, 45)
-        self.server_booster_multiplier = 1.15
+        self.xp = random.randint(80, 90)
+        self.server_booster_multiplier = 3.0
         self.give_voice_xp.start()  # Inicia o loop de tarefas
     
     async def update_user_role(self, member, new_level):
         guild = member.guild
         roles_dict = {
-            2: "Martelo de Madeira",
-            4: "Martelo de Madeira Duplo",
-            7: "Martelo de Pedra",
-            9: "Martelo de Pedra Duplo",
-            12: "Machado de Metal",
-            14: "Machado de Metal Duplo",
-            20: "Machado de Prata",
-            24: "Machado de Prata Duplo",
-            32: "Machado de Ouro",
-            35: "Machado de Ouro Duplo",
-            40: "Machado de Metal com Duas Lâminas",
-            45: "Machado de Prata com Duas Lâminas",
-            50: "Machado de Ouro com Duas Lâminas",
-            60: "Cetro de Violeta",
-            70: "Cetro de Safira",
-            80: "Cetro de Ruby",
-            100: "Cetro de Diamante Negro",
-            120: "Cetro de Diamante Negro",
-            150: "Dragão Ambar",
-            200: "Dragão Preto dos olhos Vermelhos"
+                        2: "Martelo de Madeira",
+                        4: "Martelo de Madeira Duplo",
+                        7: "Martelo de Pedra",
+                        9: "Martelo de Pedra Duplo",
+                        12: "Machado de Metal",
+                        14: "Machado de Metal Duplo",
+                        20: "Machado de Prata",
+                        24: "Machado de Prata Duplo",
+                        32: "Machado de Ouro",
+                        35: "Machado de Ouro Duplo",
+                        40: "Machado de Metal com Duas Lâminas",
+                        45: "Machado de Prata com Duas Lâminas",
+                        50: "Machado de Ouro com Duas Lâminas",
+                        41: "Estrela de Bronze",
+                        46: "Estrela de Prata",
+                        51: "Estrela de Ouro",
+                        56: "Duas Estrelas de Ouro",
+                        60: "Três Estrelas de Ouro",
+                        65: "Cetro de Violeta",
+                        70: "Cetro de Safira",
+                        75: "Cetro de Rubi",
+                        80: "Cetro de Diamante Negro",
+                        85: "Cetro de Diamante Puro",
+                        90: "Medalha de Bronze",
+                        93: "Medalha de Prata",
+                        96: "Medalha de Ouro",
+                        100: "Dragão Preto dos Olhos Vermelhos"
+
         }
         
         # Pega os nomes dos cargos
@@ -102,7 +110,7 @@ class XPVoice(commands.Cog):
                     xp_to_add = self.xp
 
                     # Aplicar o multiplicador de 15% se o usuário for Server Booster
-                    xp_multiplier = self.server_booster_multiplier if is_booster else 1.0
+                    xp_multiplier = self.server_booster_multiplier if is_booster else 2.0
                     xp_to_add = int(xp_to_add * xp_multiplier)
                                 
                     # Adiciona XP aleatório entre 20 e 30 por minuto
