@@ -25,29 +25,40 @@ class XPMensage(commands.Cog):
     async def update_user_role(self, member, new_level):
         guild = member.guild
         roles_dict = {
+                        # Fase 1: Ferramentas de Madeira e Pedra (Lv 1-9)
                         2: "Martelo de Madeira",
                         4: "Martelo de Madeira Duplo",
-                        7: "Martelo de Pedra",
-                        9: "Martelo de Pedra Duplo",
-                        12: "Machado de Metal",
-                        14: "Machado de Metal Duplo",
-                        20: "Machado de Prata",
-                        24: "Machado de Prata Duplo",
-                        32: "Machado de Ouro",
-                        35: "Machado de Ouro Duplo",
-                        40: "Machado de Metal com Duas Lâminas",
-                        45: "Machado de Prata com Duas Lâminas",
-                        50: "Machado de Ouro com Duas Lâminas",
+                        6: "Martelo de Pedra",
+                        8: "Martelo de Pedra Duplo",
+                        
+                        # Fase 2: Ferramentas de Metal (Lv 10-19)
+                        10: "Machado de Metal",
+                        12: "Machado de Metal Duplo",
+                        15: "Machado de Prata",
+                        18: "Machado de Prata Duplo",
+                        
+                        # Fase 3: Ferramentas Avançadas (Lv 20-40)
+                        20: "Machado de Ouro",
+                        23: "Machado de Ouro Duplo",
+                        27: "Machado de Metal com Duas Lâminas",
+                        31: "Machado de Prata com Duas Lâminas",
+                        36: "Machado de Ouro com Duas Lâminas",
+                        
+                        # Fase 4: Estrelas e Conquistas (Lv 41-60)
                         41: "Estrela de Bronze",
                         46: "Estrela de Prata",
                         51: "Estrela de Ouro",
                         56: "Duas Estrelas de Ouro",
                         60: "Três Estrelas de Ouro",
+                        
+                        # Fase 5: Cetros (Lv 61-85)
                         65: "Cetro de Violeta",
                         70: "Cetro de Safira",
                         75: "Cetro de Rubi",
                         80: "Cetro de Diamante Negro",
                         85: "Cetro de Diamante Puro",
+                        
+                        # Fase 6: Medalhas e Conquista Supremas (Lv 86-100)
                         90: "Medalha de Bronze",
                         93: "Medalha de Prata",
                         96: "Medalha de Ouro",
