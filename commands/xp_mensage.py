@@ -40,9 +40,9 @@ class XPMensage(commands.Cog):
                         # Fase 3: Ferramentas Avançadas (Lv 20-40)
                         20: "Machado de Ouro",
                         23: "Machado de Ouro Duplo",
-                        27: "Machado de Metal com Duas Lâminas",
-                        31: "Machado de Prata com Duas Lâminas",
-                        36: "Machado de Ouro com Duas Lâminas",
+                        27: "Machado de Metal Com Duas Lâminas",
+                        31: "Machado de Prata Com Duas Lâminas",
+                        36: "Machado de Ouro Com Duas Lâminas",
                         
                         # Fase 4: Estrelas e Conquistas (Lv 41-60)
                         41: "Estrela de Bronze",
@@ -113,7 +113,7 @@ class XPMensage(commands.Cog):
         # Buscar dados do usuário no banco de dados
         user_data = get_data.get_user_data(user_id, server_id, 'timer_message')
         if not user_data:
-            user_data = {'img': avatar_url, 'user_dc': user_name, 'xp': 0, 'xp_accumulated': 0, 'lvl': 1, 'timer': 0, 'server_id': server_id, 'last_message': ''}
+            user_data = {'img': avatar_url, 'user_dc': user_name, 'xp': 0, 'xp_accumulated': 0, 'lvl': 1, 'timer_message': 0, 'server_id': server_id, 'last_message': ''}
         
         job = rules_mensage.RulesMensage()
         check = job.check_rules_message(message, user_data['last_message'])

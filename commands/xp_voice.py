@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from db import get_data, update
 from img import top
 from log import logger
+import pytz
 
 def calculate_xp(level):
     return 1024 * level
@@ -35,9 +36,9 @@ class XPVoice(commands.Cog):
                         # Fase 3: Ferramentas Avançadas (Lv 20-40)
                         20: "Machado de Ouro",
                         23: "Machado de Ouro Duplo",
-                        27: "Machado de Metal com Duas Lâminas",
-                        31: "Machado de Prata com Duas Lâminas",
-                        36: "Machado de Ouro com Duas Lâminas",
+                        27: "Machado de Metal Com Duas Lâminas",
+                        31: "Machado de Prata Com Duas Lâminas",
+                        36: "Machado de Ouro Com Duas Lâminas",
                         
                         # Fase 4: Estrelas e Conquistas (Lv 41-60)
                         41: "Estrela de Bronze",
@@ -108,6 +109,7 @@ class XPVoice(commands.Cog):
                         continue  # Não concede XP se houver menos de 3 membros na sala
                     
                     user_id = member.id
+
                     server_id = guild.id
                     avatar_url = str(member.avatar.url) if member.avatar else 'https://i.ibb.co/xYxjFvw/9c3bb649-9038-4113-9543-7c87652aa95a-removebg-preview.png'
                     user_data = get_data.get_user_data(user_id, server_id, 'timer_voice')
@@ -140,12 +142,15 @@ class XPVoice(commands.Cog):
                         await self.update_user_role(member, user_data['lvl'])
 
                     # Atualiza o timer
-                    user_data['timer_voice'] = datetime.now(timezone.utc)
+                    current_time = datetime.now(timezone.utc)  # Tempo atual em segundos
+                    sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
+                    current_time = current_time.astimezone(sao_paulo_tz)
+                    user_data['timer_voice'] = current_time
                     
-                    logger.get_data_by_user(datetime.now().strftime("%d/%m/%Y %H:%M:%S"), member.name, 'Voice', self.xp, xp_multiplier, xp_to_add, user_data['lvl'],member.voice.channel.name, None)
+                    logger.get_data_by_user(current_time, member.name, 'Voice', self.xp, xp_multiplier, xp_to_add, user_data['lvl'],member.voice.channel.name, None)
 
                     # Salvar os dados no banco de dados
-                    update.upsert_user_data(user_id, user_data['img'], user_data['user_dc'], user_data['xp'],user_data['xp_accumulated'], user_data['lvl'], user_data['timer_voice'], server_id, user_data['last_message'], 'timer_voice')
+                    update.upsert_user_data(user_id, user_data['img'], user_data['user_dc'], user_data['xp'],user_data['xp_accumulated'], user_data['lvl'], current_time, server_id, user_data['last_message'], 'timer_voice')
 
     @give_voice_xp.before_loop
     async def before_give_voice_xp(self):
