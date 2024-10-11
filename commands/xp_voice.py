@@ -15,7 +15,7 @@ class XPVoice(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.xp = random.randint(80, 90)
-        self.server_booster_multiplier = 3.0
+        self.server_booster_multiplier = 1.15
         self.give_voice_xp.start()  # Inicia o loop de tarefas
     
     async def update_user_role(self, member, new_level):
@@ -123,7 +123,7 @@ class XPVoice(commands.Cog):
                     xp_to_add = self.xp
 
                     # Aplicar o multiplicador de 15% se o usuário for Server Booster
-                    xp_multiplier = self.server_booster_multiplier if is_booster else 2.0
+                    xp_multiplier = self.server_booster_multiplier if is_booster else 1.0
                     xp_to_add = int(xp_to_add * xp_multiplier)
                                 
                     # Adiciona XP aleatório entre 20 e 30 por minuto
